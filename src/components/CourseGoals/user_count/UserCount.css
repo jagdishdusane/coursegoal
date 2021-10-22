@@ -1,0 +1,10 @@
+.count {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin: 0 auto;
+
+     background-color: #928ad5;
+     width: 3rem;
+     height: 3rem;
+}
