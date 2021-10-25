@@ -3,9 +3,11 @@ import CourseGoalList from "./components/CourseGoals/CourseGoalList/CourseGoalLi
 import CourseInput from "./components/CourseGoals/CourseInput/CourseInput";
 import "./App.css";
 import UserCount from "./components/CourseGoals/user_count/UserCount";
+import InvalidDataPop from "./components/CourseGoals/popup_box/InvalidDataPop";
 
 const App = () => {
   const [courseGoals, setCourseGoals] = useState([]);
+  let [userCount, setUserCount] = useState(false);
 
   const addGoalHandler = (enteredText) => {
     setCourseGoals((prevGoals) => {
@@ -29,6 +31,21 @@ const App = () => {
       <CourseGoalList items={courseGoals} onDeleteItem={deleteItemHandler} />
     );
   }
+  const countHandler = () => {
+    setUserCount(true);
+    courseGoals.length = 5;
+  };
+
+  let fiveDataPopUP =
+    !userCount && courseGoals.length === 5 ? (
+      <InvalidDataPop
+        title="5 data enter successfully"
+        message="5 data enter successfully"
+        onConfirm={countHandler}
+      />
+    ) : (
+      ""
+    );
 
   return (
     <>
@@ -36,6 +53,7 @@ const App = () => {
         <CourseInput onAddGoal={addGoalHandler} />
       </section>
       <UserCount>{courseGoals.length}</UserCount>
+      {fiveDataPopUP}
       <section id="goals">{content}</section>
     </>
   );
